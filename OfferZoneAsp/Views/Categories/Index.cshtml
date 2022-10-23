@@ -1,0 +1,33 @@
+﻿@model IEnumerable<OfferZoneAsp.Models.Category>
+
+@{
+    ViewData["Title"] = "All Categories";
+}
+<br /><br />
+<h1 style="text-align:center;">Select Offer Category</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-3">
+                <div class="card text-center" style="width: 18rem">
+                    <img src="https://cdn0.iconfinder.com/data/icons/category-of-words-and-phrases/128/All-512.png" class="card-img-top img-fluid" alt="Alternate Text" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <a asp-action="OpenOffer" asp-route-id="@item.CategoryId" class="btn btn-primary">View Offers</a>
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+                
+
+            }
+        </div>
+     </div>
+</div>

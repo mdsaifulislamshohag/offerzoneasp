@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var currentUser = await UserManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    // var currentUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            @User.Identity.Name
+        </li>
+        <li class="nav-item">
+            <img class="img-profile rounded-circle" style="width:40px; height:40px;" src="~/LogoImage/@currentUser.LogoImage" />
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="User" asp-action="RegisterUser">Register User</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="User" asp-action="RegisterVendor">Register Vendor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+        </li>
+    }
+
+</ul>

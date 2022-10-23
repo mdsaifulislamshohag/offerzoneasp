@@ -1,0 +1,153 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">content_copy</i>
+                </div>
+                <p class="card-category">Total Offers</p>
+                <h3 class="card-title">
+                    @Model.Offers.Count
+                </h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons text-danger"></i>
+                    <a href="javascript:;"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">store</i>
+                </div>
+                <p class="card-category">Total Categories</p>
+                <h3 class="card-title">@Model.Categories.Count</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <p class="card-category">Total Ratings</p>
+                <h3 class="card-title">@Model.Ratings.Count</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                    <i class="fa fa-twitter"></i>
+                </div>
+                <p class="card-category">Total Users</p>
+                <h3 class="card-title">@Model.ApplicationUsers.Count</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-header card-header-warning">
+                <h4 class="card-title">Users</h4>
+                <p class="card-category">New Users</p>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-warning">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </thead>
+                    <tbody>
+                        @foreach (ApplicationUser item in Model.ApplicationUsers)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            </tr>
+                        }
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title">Recent Offers</h4>
+                <p class="card-category">New Offers</p>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-warning">
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Expire Date</th>
+                    </thead>
+                    <tbody>
+                        @foreach (Offer item in Model.recentThreeOffers)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ExpiredAt)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Generate Report.</h5>
+                <p class="card-text">
+                    Click to button to get report.
+                </p>
+                @{Html.BeginForm("GenerateReport", "Home", FormMethod.Get);
+                    {
+                        <div>
+                            <input type="submit" value="Create Report" class="btn btn-dark" />
+                        </div>
+                    }
+                    Html.EndForm();
+                }
+            </div>
+        </div>
+    </div>
+    
+</div>

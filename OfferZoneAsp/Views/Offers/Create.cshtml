@@ -1,0 +1,99 @@
+﻿@model OfferZoneAsp.Shared.OfferViewModel;
+@{
+    ViewData["Title"] = "Create Offer";
+
+    IEnumerable<Category> Categories = ViewData["Categories"] as IEnumerable<Category>;
+    IEnumerable<OfferType> OfferTypes = ViewData["OfferTypes"] as IEnumerable<OfferType>;
+}
+<h1>Create a new offer</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountedPrice" class="control-label"></label>
+                <input asp-for="DiscountedPrice" class="form-control" />
+                <span asp-validation-for="DiscountedPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfferImageName" class="control-label"></label>
+                <input id="UserImage" asp-for="OfferImageName" accept="image/*" class="form-control custom-file-input">
+                <span asp-validation-for="OfferImageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpiredAt" class="control-label"></label>
+                <input asp-for="ExpiredAt" class="form-control" />
+                <span asp-validation-for="ExpiredAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FbLink" class="control-label"></label>
+                <input asp-for="FbLink" class="form-control" />
+                <span asp-validation-for="FbLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InstagramLink" class="control-label"></label>
+                <input asp-for="InstagramLink" class="form-control" />
+                <span asp-validation-for="InstagramLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WebsiteLink" class="control-label"></label>
+                <input asp-for="WebsiteLink" class="form-control" />
+                <span asp-validation-for="WebsiteLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Category: </label>
+                <select class="form-control" asp-for="CategoryId">
+                    @foreach (Category categories in Categories)
+                    {
+                        <option value="@categories.CategoryId">@categories.Title</option>
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Offer Type: </label>
+                <select class="form-control" asp-for="OfferTypeId">
+                    @foreach (OfferType offerTypes in OfferTypes)
+                    {
+                        <option value="@offerTypes.OfferTypeId">@offerTypes.Title</option>
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNumber" class="control-label"></label>
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

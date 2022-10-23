@@ -1,0 +1,130 @@
+﻿@model OfferZoneAsp.Shared.AdminRegistrationViewModel
+@{
+    ViewData["Title"] = "RegisterAdmin";
+}
+
+<h1>RegisterAdmin</h1>
+
+
+<form asp-action="RegisterAdmin" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!--Full name-->
+    <div class="form-group row">
+        <label asp-for="Fullname" for="fullName" class="col-4 col-form-label"></label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-address-book"></i>
+                    </div>
+                </div>
+                <input asp-for="Fullname" id="fullName" name="fullName" placeholder="Full Name" type="text" class="form-control">
+            </div>
+            <span asp-validation-for="Fullname" class="text-danger"></span>
+        </div>
+    </div>
+
+    
+    <!--Address-->
+    <div class="form-group row">
+        <label for="address" asp-for="Address" class="col-4 col-form-label"></label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-home"></i>
+                    </div>
+                </div>
+                <input id="address" asp-for="Address" name="address" placeholder="Address" type="text" class="form-control">
+            </div>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!--Phone Number-->
+    <div class="form-group row">
+        <label asp-for="PhoneNumber" class="col-4 col-form-label"></label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-home"></i>
+                    </div>
+                </div>
+                <input id="PhoneNumber" asp-for="PhoneNumber" name="PhoneNumber" placeholder="Phone Number" type="text" class="form-control">
+            </div>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!--Email-->
+    <div class="form-group row">
+        <label asp-for="Email" class="col-4 col-form-label"></label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                </div>
+                <input id="email" asp-for="Email" name="email" placeholder="Email" type="text" class="form-control">
+            </div>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <!--Password-->
+    <div class="form-group row">
+        <label asp-for="Password" class="col-4 col-form-label"></label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-500px"></i>
+                    </div>
+                </div>
+                <input id="password" asp-for="Password" name="password" placeholder="Password" type="password" class="form-control">
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <!--Password Confirm-->
+    <div class="form-group row">
+        <label asp-for="ConfirmPassword" class="col-4 col-form-label"></label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-500px"></i>
+                    </div>
+                </div>
+                <input id="confirmPassword" asp-for="ConfirmPassword" name="confirmPassword" placeholder="Confirm Password" type="password" class="form-control">
+            </div>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- this is file upload -->
+    <div class="form-group row">
+        <label asp-for="LogoImage" class="col-4 col-form-label"></label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-500px"></i>
+                    </div>
+                </div>
+                <input id="LogoImage" asp-for="LogoImage" accept="image/*" class="form-control custom-file-input">
+                <label class="custom-file-label"> Choose File.... </label>
+            </div>
+            <span asp-validation-for="LogoImage" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!--Sign up button-->
+    <div class="form-group row">
+        <div class="offset-4 col-8">
+            <button name="submit" type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+    </div>
+</form>

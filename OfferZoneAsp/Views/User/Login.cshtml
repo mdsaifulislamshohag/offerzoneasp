@@ -1,0 +1,43 @@
+﻿@model OfferZoneAsp.Shared.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<form asp-action="Login">
+    <div class="form-group row">
+        <label asp-for="Email" class="col-4 col-form-label">Email Address:</label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-address-card-o"></i>
+                    </div>
+                </div>
+                <input id="email" asp-for="Email" placeholder="Email" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Password" class="col-4 col-form-label">Password</label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-500px"></i>
+                    </div>
+                </div>
+                <input id="password" asp-for="Password" placeholder="Password" type="password" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-4 col-8">
+            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+            <a class="ml-2 btn btn-dark" asp-controller="User" asp-action="Register">Register if you don't have account</a>
+        </div>
+        <br>
+    </div>
+</form>

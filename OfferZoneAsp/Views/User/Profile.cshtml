@@ -1,0 +1,133 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "_AdminLayout";
+}
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var currentUser = await UserManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    // var currentUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
+<h1>Profile</h1>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Edit Profile</h4>
+                        <p class="card-category">Complete your profile</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">Company (disabled)</label>
+                                        <input type="text" class="form-control" value="@currentUser.CompanyName" disabled="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">Username</label>
+                                        <input type="text" value="@currentUser.UserName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">Email address</label>
+                                        <input type="email" value="@currentUser.Email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">Name</label>
+                                        <input type="text" value="@currentUser.Name"  class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">Adress</label>
+                                        <input type="text"  value="@currentUser.Address"  class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">Phone Number</label>
+                                        <input type="text" value="@currentUser.PhoneNumber"  class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:;">
+                            <img class="img" src="~/LogoImage/@currentUser.LogoImage">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">
+                            @if (currentUser.CompanyName == "" || currentUser.CompanyName==null)
+                            { 
+                                <p>Buyer</p> 
+                            }else{ 
+                                <p>Seller</p>
+                            }
+                        </h6>
+                        <h4 class="card-title">@currentUser.Name</h4>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title ">Recent Post</h4>
+                                    <p class="card-category"> Post Below</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <tr>
+                                                    <th>
+                                                        Title
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (Offer item in Model.recentTwoOffers)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <a asp-action="Details" asp-route-id="@item.OfferId">@Html.DisplayFor(modelItem => item.Title)</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

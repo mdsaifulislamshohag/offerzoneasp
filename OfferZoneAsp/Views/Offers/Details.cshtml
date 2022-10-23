@@ -1,0 +1,147 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Details - " + Model.offer.Title;
+    IEnumerable<Category> Categories = ViewData["CategoryInDetail"] as IEnumerable<Category>;
+    IEnumerable<OfferType> OfferTypes = ViewData["OfferTypesInDetail"] as IEnumerable<OfferType>;
+}
+
+<!--Section: Block Content-->
+<section class="mb-5">
+
+    <div class="row">
+        <div class="col-md-6 mb-4 mb-md-0">
+
+            <div id="mdb-lightbox-ui"></div>
+
+            <div class="mdb-lightbox">
+
+                <div class="row product-gallery mx-1">
+
+                    <div class="col-12 mb-0">
+                        <figure class="view overlay rounded z-depth-1 main-img">
+                            <a href="~/OfferImages/@Model.offer.OfferImageName"
+                               data-size="710x823">
+                                <img style="width:50%" src="~/OfferImages/@Model.offer.OfferImageName"
+                                     class="img-fluid z-depth-1">
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h5>@Model.offer.Title</h5>
+            <p class="mb-2 text-muted text-uppercase small">@Model.CategoryInDetail.Title</p>
+            <div class="container">
+                <span id="rateMe4" class="feedback"></span>
+                @{Html.BeginForm("GenerateReport", "Home", FormMethod.Get);
+                    {
+                        <div>
+                            <input type="submit" value="Create Report" class="btn btn-dark" />
+                        </div>
+                    }
+                    Html.EndForm();
+                }
+            </div>
+
+
+            <p><span class="mr-1"><strong>TK. @Model.offer.Price</strong></span></p>
+            <p><span class="mr-1"><strong>TK. @Model.offer.DiscountedPrice</strong></span></p>
+            <p class="pt-1">
+                
+                @Model.offer.Description
+            </p>
+            <div class="table-responsive">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Published :</strong></th>
+                            <td>@Model.offer.CreatedAt</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Expiring :</strong></th>
+                            <td>@Model.offer.ExpiredAt</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Location :</strong></th>
+                            <td>@Model.offer.Location</td>
+                        </tr>
+                        @if (Model.offer.WebsiteLink != "")
+                        {
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Web link: </strong></th>
+                                <td>@Model.offer.WebsiteLink</td>
+                            </tr>
+                        }
+                        @if (Model.offer.FbLink != "")
+                        {
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Facebook Link</strong></th>
+                                <td>@Model.offer.FbLink</td>
+                            </tr>
+                        }
+                        @if (Model.offer.TwitterLink != "")
+                        {
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Twitter Link</strong></th>
+                                <td>@Model.offer.TwitterLink</td>
+                            </tr>
+                        }
+                        @if (Model.offer.InstagramLink != "" || Model.offer.InstagramLink != null)
+                        {
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Instagram Link: </strong></th>
+                                <td>@Model.offer.InstagramLink</td>
+                            </tr>
+                        }
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Posted By: </strong></th>
+                                <td>@Model.ApplicationUsers.CompanyName</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <hr>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="offset-md-6 col-md-6 col-sm-12">
+            <form action="" id="usrform">
+                <b>Name: </b><input type="text" class="form-control" name="usrname">
+
+                <br>
+                <textarea rows="4" cols="50" class="form-control" name="comment" form="usrform">
+            Enter Comment here...</textarea>
+                <br />
+
+                <div class="form-group">
+                    <input type="submit" value="Comment" class="btn btn-dark" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+<!--Section: Block Content-->
+
+<script>
+    $(document).ready(function () {
+        // MDB Lightbox Init
+        $(function () {
+            $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
+        });
+        $('#rateMe4').mdbRate();
+    });
+</script>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.offer.OfferId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

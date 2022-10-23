@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Create Offer";
+
+    IEnumerable<Offer> Offers = ViewData["Offers"] as IEnumerable<Offer>;
+}
+
+<div class="row">
+    @foreach (Offer item in Offers)
+    {
+        <div class="col-md-4">
+            <!-- Card -->
+            <div class="card">
+
+                <!-- Card image -->
+                <div class="view overlay">
+                    <img class="card-img-top img-fluid" style="width:500px; height:500px;" src="~/OfferImages/@item.OfferImageName"
+                         alt="Card image cap">
+                </div>
+
+                <!-- Card content -->
+                <div class="card-body">
+
+                    <!-- Title -->
+                    <h4 class="card-title"> @Html.DisplayFor(modelItem => item.Title)</h4>
+                    <!-- Button -->
+                    <a asp-action="Edit" asp-route-id="@item.OfferId" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.OfferId" class="btn btn-dark">Detail</a>
+                    <a asp-action="Delete" asp-route-id="@item.OfferId" class="btn btn-danger">Delete</a>
+
+
+                </div>
+
+            </div>
+            <!-- Card -->
+        </div>
+    }
+</div>
